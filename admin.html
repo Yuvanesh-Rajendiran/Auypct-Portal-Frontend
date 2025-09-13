@@ -450,7 +450,7 @@
             button.innerHTML = '<span style="opacity: 0.7;">Logging in...</span>';
             button.disabled = true;
             
-            fetch('/api/users/login', {
+            fetch('https://auypct-portal-backend.onrender.com/api/users/login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ username, password })
@@ -493,7 +493,7 @@ async function showDashboard() {
     document.getElementById('loginForm').style.display = 'none';
     document.getElementById('dashboard').style.display = 'block';
     try {
-        const res = await fetch('/api/applications/dashboard', {
+        const res = await fetch('https://auypct-portal-backend.onrender.com/api/applications/dashboard', {
             headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
         });
         if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
@@ -506,7 +506,7 @@ async function showDashboard() {
         let html = '';
         for (const app of overview) {
             try {
-                const detailRes = await fetch(`/api/applications/application/${app.trackingId}`, {
+                const detailRes = await fetch(`https://auypct-portal-backend.onrender.com/api/applications/application/${app.trackingId}`, {
                     headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
                 });
                 const detailData = await detailRes.json();
@@ -579,7 +579,7 @@ async function updateStatus(trackingId, status) {
         if (!status) throw new Error('Status value is missing');
         const formattedStatus = status.charAt(0).toUpperCase() + status.slice(1).toLowerCase();
         console.log(`Updating status for ${trackingId} to:`, formattedStatus);
-        const res = await fetch(`/api/applications/application/${trackingId}/status`, {
+        const res = await fetch(`https://auypct-portal-backend.onrender.com/api/applications/application/${trackingId}/status`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -607,7 +607,7 @@ async function updateStatus(trackingId, status) {
                 return;
             }
             try {
-                const res = await fetch(`/api/applications/application/${trackingId}/status`, {
+                const res = await fetch(`https://auypct-portal-backend.onrender.com/api/applications/application/${trackingId}/status`, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
