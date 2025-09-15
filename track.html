@@ -259,7 +259,7 @@
     }
 
     try {
-        const response = await fetch(`/api/applications/track/${trackingId}`);
+        const response = await fetch(`https://auypct-portal-backend.onrender.com/api/applications/track/${trackingId}`);
         const data = await response.json();
         if (data.error) {
             statusDiv.innerHTML = `<div class="alert alert-danger">${data.error}</div>`;
