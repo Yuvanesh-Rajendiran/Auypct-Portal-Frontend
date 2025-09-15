@@ -1062,30 +1062,40 @@
             }
         }
 
-        function validateNumber(input) {
-    // Remove all non-numeric characters (no decimals allowed)
-    let value = input.value.replace(/[^0-9]/g, '');
+          function validateNumber(input) {
+        // Prevent default behavior if input is invalid initially
+        let value = input.value;
 
-    // Set the input value to the filtered result
-    input.value = value;
+        // Allow only digits (no decimals or negative signs)
+        value = value.replace(/[^0-9]/g, '');
 
-    const errorDiv = input.nextElementSibling && input.nextElementSibling.classList.contains('validation-error') ? input.nextElementSibling : null;
-    if (!/^\d*$/.test(value)) {
-        input.classList.add('field-error');
-        if (!errorDiv) {
-            const div = document.createElement('div');
-            div.className = 'validation-error';
-            div.innerHTML = '⚠️ Must be a whole number';
-            input.parentNode.insertBefore(div, input.nextSibling);
+        // Ensure value doesn't exceed a reasonable maximum (e.g., 999999)
+        if (value.length > 6) {
+            value = value.slice(0, 6); // Limit to 6 digits
         }
-    } else {
-        input.classList.remove('field-error');
-        if (errorDiv) errorDiv.remove();
-    }
 
-    // Debugging log to track input value
-    console.log('Input value set to:', value);
-}
+        // Update input value only if it has changed
+        if (input.value !== value) {
+            input.value = value;
+        }
+
+        const errorDiv = input.nextElementSibling && input.nextElementSibling.classList.contains('validation-error') ? input.nextElementSibling : null;
+        if (value === '' || !/^\d*$/.test(value)) {
+            input.classList.add('field-error');
+            if (!errorDiv) {
+                const div = document.createElement('div');
+                div.className = 'validation-error';
+                div.innerHTML = '⚠️ Must be a whole number';
+                input.parentNode.insertBefore(div, input.nextSibling);
+            }
+        } else {
+            input.classList.remove('field-error');
+            if (errorDiv) errorDiv.remove();
+        }
+
+        // Debugging log
+        console.log('Input value set to:', value);
+    }
         // Enhanced form interactions
         function toggleDetails() {
             const type = document.getElementById('applicant_type').value;
