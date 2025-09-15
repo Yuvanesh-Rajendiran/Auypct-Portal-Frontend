@@ -1062,21 +1062,26 @@
             }
         }
 
-          function validateNumber(input) {
-        // Prevent default behavior if input is invalid initially
-        let value = input.value;
+ function validateNumber(input) {
+        // Get the current value and store the previous value for comparison
+        let currentValue = input.value;
+        let previousValue = input.dataset.previousValue || '';
+
+        // Log for debugging
+        console.log('Current value:', currentValue, 'Previous value:', previousValue);
 
         // Allow only digits (no decimals or negative signs)
-        value = value.replace(/[^0-9]/g, '');
+        let value = currentValue.replace(/[^0-9]/g, '');
 
-        // Ensure value doesn't exceed a reasonable maximum (e.g., 999999)
+        // Limit to a reasonable maximum (e.g., 6 digits)
         if (value.length > 6) {
-            value = value.slice(0, 6); // Limit to 6 digits
+            value = value.slice(0, 6); // Cap at 6 digits (e.g., 999999)
         }
 
-        // Update input value only if it has changed
-        if (input.value !== value) {
+        // Only update if the value has changed to prevent recursion
+        if (value !== previousValue || value !== currentValue) {
             input.value = value;
+            input.dataset.previousValue = value; // Store the new value
         }
 
         const errorDiv = input.nextElementSibling && input.nextElementSibling.classList.contains('validation-error') ? input.nextElementSibling : null;
@@ -1093,9 +1098,14 @@
             if (errorDiv) errorDiv.remove();
         }
 
-        // Debugging log
-        console.log('Input value set to:', value);
+        // Debugging log after update
+        console.log('Final value set to:', input.value);
     }
+
+    // Initialize dataset for existing inputs
+    document.querySelectorAll('#requested_amount, #confirmed_amount').forEach(input => {
+        input.dataset.previousValue = input.value || '';
+    });
         // Enhanced form interactions
         function toggleDetails() {
             const type = document.getElementById('applicant_type').value;
