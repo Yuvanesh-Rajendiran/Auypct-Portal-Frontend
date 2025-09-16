@@ -699,7 +699,7 @@
                 <div class="personal-details-header">
                     <div class="date-section">
                         <label>Application Date <span class="required"></span>:</label>
-                        <input type="date" id="level1_application_date" name="level1_application_date" value="2025-09-12" required>
+                        <input type="date" id="level1_application_date" name="level1_application_date"  required>
                     </div>
                     <div class="photo-section">
                         <div class="photo-upload">
@@ -994,6 +994,11 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+          // Set today's date in the level1_application_date input
+           document.addEventListener('DOMContentLoaded', () => {
+           const today = new Date().toLocaleDateString('en-CA'); // Formats as YYYY-MM-DD
+            document.getElementById('level1_application_date').value = today;
+          });
         // Progress bar functionality
         function updateProgressBar() {
             const scrollTop = window.scrollY;
