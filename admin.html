@@ -451,12 +451,10 @@
         </div>
     </nav>
 
-    <div class="floating-elements"></div>
-    
     <div class="container">
         <div id="loginForm" style="max-width: 500px; margin: 0 auto;">
             <div class="header">
-                <h1>Admin Login</h1> <!-- Changed from Admin Dashboard to Admin Login -->
+                <h1>Admin Login</h1>
                 <p>Access the AUYPCT Admin Dashboard</p>
             </div>
             
@@ -478,14 +476,14 @@
             <button onclick="login()">Login</button>
         </div>
         
-        <div id="dashboard" style="display:none;">
-            <button onclick="logout()" class="btn btn-outline-danger mb-3">Logout</button>
+        <div id="dashboard" style="display:none; position: relative;">
+            <button id="logout-btn" class="btn btn-outline-danger" onclick="logout()">Logout</button>
             <div class="header">
                 <h1 id="dashboardTitle">Admin Dashboard</h1>
-                <p>Welcome to the AUYPCT Dashboard</p>
+                <p>Welcome to the AUYPCT Admin Dashboard</p>
             </div>
             <h2>Applications List</h2>
-            <div id="appsList" class="row justify-content-center"></div> <!-- Added row justify-content-center -->
+            <div id="appsList" class="row justify-content-center"></div>
         </div>
     </div>
 
@@ -495,7 +493,7 @@
         let userRole = localStorage.getItem('role');
         if (token && userRole === 'admin') showDashboard();
 
-         function login() {
+        function login() {
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
             const button = document.querySelector('button');
