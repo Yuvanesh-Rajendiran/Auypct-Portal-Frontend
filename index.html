@@ -53,8 +53,8 @@
                 <h3>Level 1: Initial Assessment</h3>
                 <div class="personal-details-header">
                     <div class="date-section">
-                        <label>Application Date <span class="required"></span>:</label>
-                        <input type="date" id="level1_application_date" name="level1_application_date"  required>
+                        <label>Application Date:</label>
+                        <input type="date" id="level1_application_date" name="level1_application_date"  disabled>
                     </div>
                     <div class="photo-section">
                         <div class="photo-upload">
@@ -65,7 +65,7 @@
                                     <polyline points="17,8 12,3 7,8"></polyline>
                                     <line x1="12" y1="3" x2="12" y2="15"></line>
                                 </svg>
-                                <div id="upload-text">Upload Photo</div>
+                                <div id="upload-text">Upload Photo <span class="required"></span></div>
                                 <button class="change-photo-btn" onclick="document.getElementById('passport_photo').click()">Change Photo</button>
                             </div>
                             <input type="file" id="passport_photo" name="passport_photo" accept="image/*" required>
@@ -76,11 +76,11 @@
                 <h4>Personal Details</h4>
                 <div class="field-group">
                     <div>
-                        <label>Applicant Name <span class="required"></span>:</label>
+                        <label>Applicant Name <span class="required"></span></label>
                         <input type="text" id="applicant_name" name="applicant_name" required>
                     </div>
                     <div>
-                        <label>Applicant Type <span class="required"></span>:</label>
+                        <label>Applicant Type <span class="required"></span></label>
                         <select id="applicant_type" name="applicant_type" onchange="toggleDetails()" required>
                             <option value="">Select Type</option>
                             <option value="student">Student</option>
@@ -88,49 +88,50 @@
                             <option value="others">Others</option>
                         </select>
                     </div>
+                    <div>
+                        <label>Date of Birth (DOB) <span class="required"></span></label>
+                        <input type="date" id="dob" name="dob" required>
+                    </div>
                 </div>
                 
                 <div class="field-group">
                     <div>
-                        <label>Date of Birth (DOB) <span class="required"></span>:</label>
-                        <input type="date" id="dob" name="dob" required>
-                    </div>
-                    <div>
+                        <label>Gender <span class="required"></span></label>
                         <div class="radio-group">
-                            <label>Gender <span class="required"></span>:</label>
                             <label><input type="radio" name="gender" value="male" required> Male</label>
                             <label><input type="radio" name="gender" value="female"> Female</label>
                         </div>
                     </div>
-                </div>
-                
-                <div class="field-group">
                     <div>
-                        <label>Contact Number <span class="required"></span>:</label>
+                        <label>Contact Number <span class="required"></span></label>
                         <input type="tel" id="contact_number" name="contact_number" oninput="validatePhone(this)" required>
                     </div>
                     <div>
-                        <label>Email ID <span class="required"></span>:</label>
+                        <label>Email ID <span class="required"></span></label>
                         <input type="email" id="email_id" name="email_id" required>
                     </div>
                 </div>
+                <div class="field-group">
+                    <div>
+                        <label for="aadhaar_number">Aadhaar Number <span class="required"></span></label>
+                        <input type="text" id="aadhaar_number" name="aadhaar_number" oninput="validateAadhaar(this)" required>
+                    </div>
+                </div>
                 
-                <label>Aadhaar Number <span class="required"></span>:</label>
-                <input type="text" id="aadhaar_number" name="aadhaar_number" oninput="validateAadhaar(this)" required>
                 
                 <div class="section" id="education_details_section" style="display:none;">
                     <h4>Educational Details</h4>
                     <div class="field-group">
                         <div>
-                            <label>Class / Degree with Major <span class="required"></span>:</label>
+                            <label>Class / Degree with Major <span class="required"></span></label>
                             <input type="text" id="class_degree" name="class_degree">
                         </div>
                         <div>
-                            <label>School / College Name <span class="required"></span>:</label>
+                            <label>School / College Name <span class="required"></span></label>
                             <input type="text" id="school_college_name" name="school_college_name">
                         </div>
                     </div>
-                    <label>Medium <span class="required"></span>:</label>
+                    <label>Medium <span class="required"></span></label>
                     <input type="text" id="medium" name="medium">
                 </div>
                 
@@ -138,32 +139,36 @@
                     <h4>Working Details</h4>
                     <div class="field-group">
                         <div>
-                            <label>What is your role in working profession? <span class="required"></span>:</label>
+                            <label>What is your role in working profession? <span class="required"></span></label>
                             <input type="text" id="working_role" name="working_role">
                         </div>
                         <div>
-                            <label>Organisation Name <span class="required"></span>:</label>
+                            <label>Organisation Name <span class="required"></span></label>
                             <input type="text" id="organisation_name" name="organisation_name">
                         </div>
                     </div>
-                    <label>Location of Organisation <span class="required"></span>:</label>
+                    <label>Location of Organisation <span class="required"></span></label>
                     <input type="text" id="organisation_location" name="organisation_location">
                 </div>
                 
                 <div class="section" id="other_details_section" style="display:none;">
                     <h4>Other Details</h4>
-                    <label>Details about yourself <span class="required"></span>:</label>
+                    <label>Details about yourself <span class="required"></span></label>
                     <textarea id="other_details" name="other_details" rows="3"></textarea>
                 </div>
                 
                 <h4>Referral and Awareness</h4>
                 <div class="field-group">
                     <div>
-                        <label>Who referred you? & Their Contact No <span class="required"></span>:</label>
+                        <label>Who referred you?<span class="required"></span></label>
                         <input type="text" id="referral" name="referral" required>
                     </div>
                     <div>
-                        <label>How did you know about this scheme? <span class="required"></span>:</label>
+                        <label>Referrer's Contact No<span class="required"></span></label>
+                        <input type="text" id="referral_contact_no" name="referral_contact_no" required>
+                    </div>
+                    <div>
+                        <label>How did you know about this scheme? <span class="required"></span></label>
                         <input type="text" id="scheme_awareness" name="scheme_awareness" required>
                     </div>
                 </div>
@@ -171,18 +176,18 @@
                 <h4>Family Financial Details</h4>
                 <div class="field-group">
                     <div>
-                        <label>What's the source of Income for your family? <span class="required"></span>:</label>
+                        <label>What's the source of Income for your family? <span class="required"></span></label>
                         <input type="text" id="family_income_source" name="family_income_source" required>
                     </div>
                     <div>
-                        <label>Father's Occupation <span class="required"></span>:</label>
+                        <label>Father's Occupation <span class="required"></span></label>
                         <input type="text" id="father_occupation" name="father_occupation" required>
                     </div>
                 </div>
                 
                 <div class="field-group">
                     <div>
-                        <label>Mother's Occupation <span class="required"></span>:</label>
+                        <label>Mother's Occupation <span class="required"></span></label>
                         <input type="text" id="mother_occupation" name="mother_occupation" required>
                     </div>
                     <div>
@@ -218,14 +223,11 @@
                 </div>
                 
                 <h4>Scholarship Request</h4>
-                <label>Justify why you need a scholarship? <span class="required"></span>:</label>
+                <label>Justify why you need a scholarship? <span class="required"></span></label>
                 <textarea id="scholarship_justification" name="scholarship_justification" rows="4" required></textarea>
                 
-                <label>How much is the fees for the current year? & Breakup <span class="required"></span>:</label>
+                <label>How much is the fees for the current year? <span class="conditional-text">(Mention with the breakup)</span><span class="required"></span></label>
                 <textarea id="fee_breakup" name="fee_breakup" rows="4" required></textarea>
-                
-                <label>How much do you request from us? <span class="required"></span>:</label>
-                <input type="number" id="requested_amount" name="requested_amount" step="0.01" oninput="validateNumber(this)" required>
             </div>
 
             <div class="section">
@@ -233,7 +235,7 @@
                 <div class="field-group">
                     <div>
                         <label>Amount Requesting <span class="required"></span>:</label>
-                        <input type="number" id="confirmed_amount" name="confirmed_amount" step="0.01" oninput="validateNumber(this)" required>
+                        <input type="number" id="confirmed_amount" name="confirmed_amount" step="1" min="1" oninput="validateNumber(this)" required>
                     </div>
                     <div id="high_amount_section" style="display:none;">
                         <label>Why can't you change to a school with relatively low cost?:</label>
@@ -243,17 +245,10 @@
                 
                 <div class="field-group">
                     <div>
-                        <label>How will you manage the balance money for fees ? <span class="conditional-text">(if you are a student)</span>:</label>
-                        <input type="text" id="balance_management" name="balance_management" >
-                    </div>
-                    <div>
-                        <label>School/Organisation Name:</label>
-                        <input type="text" id="school_organisation_name" name="school_organisation_name">
+                        <label>How will you manage the balance money for fees ?</label>
+                        <input type="text" id="balance_management" name="balance_management" required>
                     </div>
                 </div>
-                
-                <label>Note any interesting findings about the applicant:</label>
-                <textarea id="interesting_findings" name="interesting_findings" rows="4"></textarea>
             </div>
 
             <div class="section">
@@ -270,7 +265,18 @@
                 
                 <div id="educational_docs" class="doc-section">
                     <label>Upload Aadhaar/Any ID proof with Address & Photo:</label>
-                    <input type="file" name="educational_aadhaar" accept=".pdf,.jpg,.png">
+                    <input type="file" id="aadhaarUpload" name="educational_aadhaar" accept=".pdf,.jpg,.png">
+                    <script>
+                    document.getElementById('aadhaarUpload').addEventListener('change', function () {
+                        const file = this.files[0];
+                        const allowedExtensions = ['pdf', 'jpg', 'png'];
+                        const fileExtension = file.name.split('.').pop().toLowerCase();
+                        if (!allowedExtensions.includes(fileExtension)) {
+                            alert('Invalid file type. Only PDF, JPG, and PNG are allowed.');
+                            this.value = ''; // Clear the field
+                            }
+                    });
+                    </script>
                     <label>Upload Bank Passbook (First Page) - Xerox:</label>
                     <input type="file" name="educational_passbook" accept=".pdf,.jpg,.png">
                     <label>Upload Marksheet/Report Card - Xerox:</label>

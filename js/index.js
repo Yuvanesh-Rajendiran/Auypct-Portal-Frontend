@@ -105,7 +105,7 @@ function validateNumber(input) {
 }
 
 // Initialize dataset for existing inputs
-document.querySelectorAll('#requested_amount, #confirmed_amount').forEach(input => {
+document.querySelectorAll('#confirmed_amount').forEach(input => {
     input.dataset.previousValue = input.value || '';
 });
 
@@ -310,15 +310,16 @@ function validateForm() {
         { id: 'contact_number', label: 'Contact Number' },
         { id: 'email_id', label: 'Email ID' },
         { id: 'aadhaar_number', label: 'Aadhaar Number' },
-        { id: 'referral', label: 'Referral Information' },
+        { id: 'referral', label: 'Referral Name' },
+        { id: 'referral_contact_no', label: `Referrer's Number` },
         { id: 'scheme_awareness', label: 'Scheme Awareness' },
         { id: 'family_income_source', label: 'Family Income Source' },
         { id: 'father_occupation', label: 'Father\'s Occupation' },
         { id: 'mother_occupation', label: 'Mother\'s Occupation' },
         { id: 'scholarship_justification', label: 'Scholarship Justification' },
         { id: 'fee_breakup', label: 'Fee Breakup' },
-        { id: 'requested_amount', label: 'Requested Amount' },
-        { id: 'confirmed_amount', label: 'Confirmed Amount' },
+        { id: 'confirmed_amount', label: 'Requested Amount' },
+        { id: 'balance_management', label: 'Details about managing balance amount' },        
         { id: 'request_category', label: 'Request Category' },
         { id: 'captcha-answer', label: 'CAPTCHA Answer' }
     ];
@@ -434,12 +435,6 @@ function validateForm() {
     if (aadhaar && !isValidAadhaar(aadhaar)) {
         errors.push('Please enter a valid 12-digit Aadhaar number');
         document.getElementById('aadhaar_number').classList.add('field-error');
-    }
-    
-    const requestedAmount = document.getElementById('requested_amount').value;
-    if (requestedAmount && !/^\d*\.?\d*$/.test(requestedAmount)) {
-        errors.push('Requested Amount must be a valid number');
-        document.getElementById('requested_amount').classList.add('field-error');
     }
     
     const confirmedAmount = document.getElementById('confirmed_amount').value;
