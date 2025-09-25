@@ -107,11 +107,15 @@
                         <input type="tel" id="contact_number" name="contact_number" oninput="validatePhone(this)" required>
                     </div>
                     <div>
-                        <label>Email ID <span class="required"></span></label>
-                        <input type="email" id="email_id" name="email_id" required>
+                        <label>Parent / Alternate Contact Number <span class="required"></span></label>
+                        <input type="tel" id="alt_contact_number" name="alt_contact_number" oninput="validatePhone(this)" required>
                     </div>
                 </div>
                 <div class="field-group">
+                    <div>
+                        <label>Email ID <span class="required"></span></label>
+                        <input type="email" id="email_id" name="email_id" required>
+                    </div>
                     <div>
                         <label for="aadhaar_number">Aadhaar Number <span class="required"></span></label>
                         <input type="text" id="aadhaar_number" name="aadhaar_number" oninput="validateAadhaar(this)" required>
@@ -178,6 +182,10 @@
                     <div>
                         <label>What's the source of Income for your family? <span class="required"></span></label>
                         <input type="text" id="family_income_source" name="family_income_source" required>
+                    </div>
+                    <div>
+                        <label>Value of Annual Income<span class="required"></span></label>
+                        <input type="number" id="annual_income" name="annual_income" step="1" min="1" oninput="validateNumber(this)" required>
                     </div>
                     <div>
                         <label>Father's Occupation <span class="required"></span></label>
@@ -265,55 +273,44 @@
                 
                 <div id="educational_docs" class="doc-section">
                     <label>Upload Aadhaar/Any ID proof with Address & Photo:</label>
-                    <input type="file" id="aadhaarUpload" name="educational_aadhaar" accept=".pdf,.jpg,.png">
-                    <script>
-                    document.getElementById('aadhaarUpload').addEventListener('change', function () {
-                        const file = this.files[0];
-                        const allowedExtensions = ['pdf', 'jpg', 'png'];
-                        const fileExtension = file.name.split('.').pop().toLowerCase();
-                        if (!allowedExtensions.includes(fileExtension)) {
-                            alert('Invalid file type. Only PDF, JPG, and PNG are allowed.');
-                            this.value = ''; // Clear the field
-                            }
-                    });
-                    </script>
+                    <input type="file" id="validateFile" name="aadhaarUpload" accept=".pdf,.jpg,.png">
                     <label>Upload Bank Passbook (First Page) - Xerox:</label>
-                    <input type="file" name="educational_passbook" accept=".pdf,.jpg,.png">
+                    <input type="file" id="validateFile" name="educational_passbook" accept=".pdf,.jpg,.png">
                     <label>Upload Marksheet/Report Card - Xerox:</label>
-                    <input type="file" name="educational_marksheet" accept=".pdf,.jpg,.png">
+                    <input type="file" id="validateFile" name="educational_marksheet" accept=".pdf,.jpg,.png">
                     <label>Upload Fees Receipt from School/College:</label>
-                    <input type="file" name="educational_fee_receipt" accept=".pdf,.jpg,.png">
+                    <input type="file" id="validateFile" name="educational_fee_receipt" accept=".pdf,.jpg,.png">
                     <label>Upload School ID Card:</label>
-                    <input type="file" name="educational_school_id" accept=".pdf,.jpg,.png">
+                    <input type="file" id="validateFile" name="educational_school_id" accept=".pdf,.jpg,.png">
                 </div>
                 
                 <div id="women_docs" class="doc-section">
                     <label>Upload Aadhaar/Any ID proof with Address & Photo:</label>
-                    <input type="file" name="women_aadhaar" accept=".pdf,.jpg,.png">
+                    <input type="file" id="validateFile" name="women_aadhaar" accept=".pdf,.jpg,.png">
                     <label>Upload Bank Passbook (First Page) - Xerox:</label>
-                    <input type="file" name="women_passbook" accept=".pdf,.jpg,.png">
+                    <input type="file" id="validateFile" name="women_passbook" accept=".pdf,.jpg,.png">
                     <label>Upload Supportive Documents for Business Existence:</label>
-                    <input type="file" name="women_business_docs" accept=".pdf,.jpg,.png" multiple>
+                    <input type="file" id="validateFile" name="women_business_docs" accept=".pdf,.jpg,.png" multiple>
                 </div>
                 
                 <div id="entrepreneur_docs" class="doc-section">
                     <label>Upload Aadhaar/Address Proof with Photo:</label>
-                    <input type="file" name="entrepreneur_aadhaar" accept=".pdf,.jpg,.png">
+                    <input type="file" id="validateFile" name="entrepreneur_aadhaar" accept=".pdf,.jpg,.png">
                     <label>Upload Bank Passbook (First Page) - Xerox:</label>
-                    <input type="file" name="entrepreneur_passbook" accept=".pdf,.jpg,.png">
+                    <input type="file" id="validateFile" name="entrepreneur_passbook" accept=".pdf,.jpg,.png">
                     <label>Upload Supportive Documents for Business Existence:</label>
-                    <input type="file" name="entrepreneur_business_docs" accept=".pdf,.jpg,.png" multiple>
+                    <input type="file" id="validateFile" name="entrepreneur_business_docs" accept=".pdf,.jpg,.png" multiple>
                 </div>
                 
                 <div id="medical_docs" class="doc-section">
                     <label>Upload Aadhaar/Any ID proof with Address & Photo:</label>
-                    <input type="file" name="medical_aadhaar" accept=".pdf,.jpg,.png">
+                    <input type="file" id="validateFile" name="medical_aadhaar" accept=".pdf,.jpg,.png">
                     <label>Upload Bank Passbook (First Page) - Xerox:</label>
-                    <input type="file" name="medical_passbook" accept=".pdf,.jpg,.png">
+                    <input type="file" id="validateFile" name="medical_passbook" accept=".pdf,.jpg,.png">
                     <label>Upload Letter from Hospital/Doctor:</label>
-                    <input type="file" name="medical_letter" accept=".pdf,.jpg,.png">
+                    <input type="file" id="validateFile" name="medical_letter" accept=".pdf,.jpg,.png">
                     <label>Upload Receipt/Bills from Hospital/Doctor:</label>
-                    <input type="file" name="medical_receipt" accept=".pdf,.jpg,.png">
+                    <input type="file" id="validateFile" name="medical_receipt" accept=".pdf,.jpg,.png" required>
                 </div>
             </div>
 
@@ -321,8 +318,9 @@
                 <h3>Level 4: Finalization</h3>
                 <div style="background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%); padding: 25px; border-radius: 12px; margin-bottom: 20px; border-left: 4px solid #667eea;">
                     <h4 style="margin-top: 0; color: #2d3748;">Send hard copies to:</h4>
-                    <p style="margin: 8px 0; font-weight: 600; color: #1a202c;">INK CENTER, C/O AU YOUNG PROFESSIONALS CHARITABLE TRUST</p>
-                    <p style="margin: 8px 0; color: #4a5568;">34-23/810, ATTUMANTHAI Anjal Kara Street, EASTGATE, Thanjavur - 613001</p>
+                    <p style="margin: 8px 0; font-weight: 600; color: #1a202c;">AU YOUNG PROFESSIONALS CHARITABLE TRUST</p>
+                    <p style="margin: 8px 0; color: #4a5568;">34-23/810, Aatumanthai Anjalkara Street,<br>Eastgate, Thanjavur - 613001</p>
+                    <p style="margin: 8px 0; color: #4a5568; font-weight: 600;">Landmark: MRG Engineering</p>
                     <p style="margin: 8px 0; color: #4a5568; font-weight: 600;">Contact: 84283 66631</p>
                 </div>
                 

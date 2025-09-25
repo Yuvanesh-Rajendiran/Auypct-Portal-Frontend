@@ -308,12 +308,14 @@ function validateForm() {
         { id: 'applicant_type', label: 'Applicant Type' },
         { id: 'dob', label: 'Date of Birth' },
         { id: 'contact_number', label: 'Contact Number' },
+        { id: 'alt_contact_number', label: 'Alternate Contact Number' },
         { id: 'email_id', label: 'Email ID' },
         { id: 'aadhaar_number', label: 'Aadhaar Number' },
         { id: 'referral', label: 'Referral Name' },
         { id: 'referral_contact_no', label: `Referrer's Number` },
         { id: 'scheme_awareness', label: 'Scheme Awareness' },
         { id: 'family_income_source', label: 'Family Income Source' },
+        { id: 'annual_income', label: 'Annual Income' },
         { id: 'father_occupation', label: 'Father\'s Occupation' },
         { id: 'mother_occupation', label: 'Mother\'s Occupation' },
         { id: 'scholarship_justification', label: 'Scholarship Justification' },
@@ -536,26 +538,63 @@ document.addEventListener('DOMContentLoaded', function() {
     captchaSection.appendChild(refreshLink);
 });
 
+const allowedExtensions= ['pdf', 'jpg', 'png'];
+validateFileType('validateFile', allowedExtensions);
+
+function validateFileType(inputElementId, allowedExtensions) {
+  const input = document.getElementById(inputElementId);
+  if (!input) return;
+
+  input.addEventListener('change', function () {
+    const file = this.files[0];
+    if (!file) return;
+
+    const fileExtension = file.name.split('.').pop().toLowerCase();
+    const maxSizeMB = 5;
+    const maxSizeBytes = maxSizeMB * 1024 * 1024;
+
+    // Check file extension
+    if (!allowedExtensions.includes(fileExtension)) {
+      alert(`Invalid file type. Only ${allowedExtensions.join(', ').toUpperCase()} files are allowed.`);
+      this.value = ''; // Clear the input
+      return;
+    }
+
+    // Check file size
+    if (file.size > maxSizeBytes) {
+      alert(`File too large. Maximum allowed size is ${maxSizeMB} MB.`);
+      this.value = ''; // Clear the input
+      return;
+    }
+  });
+}
+
 // Add file upload feedback
 document.querySelectorAll('input[type="file"]').forEach(input => {
-    input.addEventListener('change', function() {
-        if (this.files.length > 0) {
-            this.style.borderColor = '#48bb78';
-            this.style.backgroundColor = 'rgba(72, 187, 120, 0.05)';
-            
-            const indicator = document.createElement('span');
-            indicator.innerHTML = '✓ File selected';
-            indicator.style.color = '#48bb78';
-            indicator.style.fontSize = '0.9rem';
-            indicator.style.marginLeft = '10px';
-            
-            const existingIndicator = this.parentNode.querySelector('.file-indicator');
-            if (existingIndicator) {
-                existingIndicator.remove();
-            }
-            
-            indicator.className = 'file-indicator';
-            this.parentNode.appendChild(indicator);
-        }
-    });
+  input.addEventListener('change', function () {
+    const file = this.files[0];
+
+    // Reset styles and remove any existing indicator
+    this.style.borderColor = '';
+    this.style.backgroundColor = '';
+    const existingIndicator = this.parentNode.querySelector('.file-indicator');
+    if (existingIndicator) {
+      existingIndicator.remove();
+    }
+
+    // If a file is selected and assumed valid (based on your external validation)
+    if (file) {
+      this.style.borderColor = '#48bb78';
+      this.style.backgroundColor = 'rgba(72, 187, 120, 0.05)';
+
+      const indicator = document.createElement('span');
+      indicator.textContent = '✓ File selected';
+      indicator.className = 'file-indicator';
+      indicator.style.color = '#48bb78';
+      indicator.style.fontSize = '0.9rem';
+      indicator.style.marginLeft = '10px';
+
+      this.insertAdjacentElement('afterend', indicator);
+    }
+  });
 });
