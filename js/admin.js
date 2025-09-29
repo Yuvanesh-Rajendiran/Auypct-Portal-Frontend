@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
 function login() {
   const username = document.getElementById('username').value;
   const password = document.getElementById('password').value;
-  const button = document.querySelector('button');
+  const button = document.getElementById('loginbtn');
   const validationSummary = document.getElementById('validation-summary');
   const validationList = document.getElementById('validation-list');
 
