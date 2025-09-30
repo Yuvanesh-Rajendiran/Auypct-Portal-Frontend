@@ -538,63 +538,42 @@ document.addEventListener('DOMContentLoaded', function() {
     captchaSection.appendChild(refreshLink);
 });
 
-const allowedExtensions= ['pdf', 'jpg', 'png'];
-validateFileType('validateFile', allowedExtensions);
+// Validate file uploads only under document categories
+const allowedExtensions = ['pdf', 'jpg', 'png'];
+const maxSizeMB = 5;
+const maxSizeBytes = maxSizeMB * 1024 * 1024;
 
-function validateFileType(inputElementId, allowedExtensions) {
-  const input = document.getElementById(inputElementId);
-  if (!input) return;
+// Only target file inputs inside doc sections
+document.querySelectorAll('.doc-section input[type="file"]').forEach(input => {
+    input.addEventListener('change', function () {
+        if (!this.files.length) return;
 
-  input.addEventListener('change', function () {
-    const file = this.files[0];
-    if (!file) return;
+        const fileList = this.files;
+        for (let file of fileList) {
+            const fileExtension = file.name.split('.').pop().toLowerCase();
+            if (!allowedExtensions.includes(fileExtension)) {
+                alert(`Invalid file type. Only ${allowedExtensions.join(', ').toUpperCase()} files are allowed.`);
+                this.value = '';
+                return;
+            }
 
-    const fileExtension = file.name.split('.').pop().toLowerCase();
-    const maxSizeMB = 5;
-    const maxSizeBytes = maxSizeMB * 1024 * 1024;
+            if (file.size > maxSizeBytes) {
+                alert(`File too large. Maximum allowed size is ${maxSizeMB} MB.`);
+                this.value = '';
+                return;
+            }
+        }
 
-    // Check file extension
-    if (!allowedExtensions.includes(fileExtension)) {
-      alert(`Invalid file type. Only ${allowedExtensions.join(', ').toUpperCase()} files are allowed.`);
-      this.value = ''; // Clear the input
-      return;
-    }
+        // File feedback
+        const existingIndicator = this.parentNode.querySelector('.file-indicator');
+        if (existingIndicator) existingIndicator.remove();
 
-    // Check file size
-    if (file.size > maxSizeBytes) {
-      alert(`File too large. Maximum allowed size is ${maxSizeMB} MB.`);
-      this.value = ''; // Clear the input
-      return;
-    }
-  });
-}
-
-// Add file upload feedback
-document.querySelectorAll('input[type="file"]').forEach(input => {
-  input.addEventListener('change', function () {
-    const file = this.files[0];
-
-    // Reset styles and remove any existing indicator
-    this.style.borderColor = '';
-    this.style.backgroundColor = '';
-    const existingIndicator = this.parentNode.querySelector('.file-indicator');
-    if (existingIndicator) {
-      existingIndicator.remove();
-    }
-
-    // If a file is selected and assumed valid (based on your external validation)
-    if (file) {
-      this.style.borderColor = '#48bb78';
-      this.style.backgroundColor = 'rgba(72, 187, 120, 0.05)';
-
-      const indicator = document.createElement('span');
-      indicator.textContent = '✓ File selected';
-      indicator.className = 'file-indicator';
-      indicator.style.color = '#48bb78';
-      indicator.style.fontSize = '0.9rem';
-      indicator.style.marginLeft = '10px';
-
-      this.insertAdjacentElement('afterend', indicator);
-    }
-  });
+        const indicator = document.createElement('span');
+        indicator.textContent = '✓ File selected';
+        indicator.className = 'file-indicator';
+        indicator.style.color = '#48bb78';
+        indicator.style.fontSize = '0.9rem';
+        indicator.style.marginLeft = '10px';
+        this.insertAdjacentElement('afterend', indicator);
+    });
 });
