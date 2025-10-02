@@ -1,0 +1,351 @@
+<!DOCTYPE html >
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AU Young Professionals Charitable Trust - Application Form</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./css/app.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">AUYPCT</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#apply-section">Apply Scholarship</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="track.html">Track Application</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="progress-bar" id="progressBar"></div>
+    <div class="floating-elements"></div>
+    
+    <div class="container">
+        <div class="header">
+            <h1>AU YOUNG PROFESSIONALS CHARITABLE TRUST</h1>
+            <p>NO ONE HAS EVER BECOME POOR FROM GIVING</p>
+            <p>Trust Registration No: 201500130 (Registered at Chennai)</p>
+            <p>34-23/810, Aatumanthai Anjalkara Street, Eastgate, Thanjavur - 613 001</p>
+            <p>Email: auyptrust@gmail.com</p>
+        </div>
+        
+        <div class="form-section" id="apply-section">
+            <div class="section">
+                <h3>Level 1: Initial Assessment</h3>
+                <div class="personal-details-header">
+                    <div class="date-section">
+                        <label>Application Date:</label>
+                        <input type="date" id="level1_application_date" name="level1_application_date"  disabled>
+                    </div>
+                    <div class="photo-section">
+                        <div class="photo-upload">
+                            <img id="preview_image" src="" alt="Preview" style="display: none;">
+                            <div class="photo-upload-content">
+                                <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                    <polyline points="17,8 12,3 7,8"></polyline>
+                                    <line x1="12" y1="3" x2="12" y2="15"></line>
+                                </svg>
+                                <div id="upload-text">Upload Photo <span class="required"></span></div>
+                                <button class="change-photo-btn" onclick="document.getElementById('passport_photo').click()">Change Photo</button>
+                            </div>
+                            <input type="file" id="passport_photo" name="passport_photo" accept="image/*" required>
+                        </div>
+                    </div>
+                </div>
+                
+                <h4>Personal Details</h4>
+                <div class="field-group">
+                    <div>
+                        <label>Applicant Name <span class="required"></span></label>
+                        <input type="text" id="applicant_name" name="applicant_name" required>
+                    </div>
+                    <div>
+                        <label>Applicant Type <span class="required"></span></label>
+                        <select id="applicant_type" name="applicant_type" onchange="toggleDetails()" required>
+                            <option value="">Select Type</option>
+                            <option value="student">Student</option>
+                            <option value="working_profession">Working Profession</option>
+                            <option value="others">Others</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label>Date of Birth (DOB) <span class="required"></span></label>
+                        <input type="date" id="dob" name="dob" required>
+                    </div>
+                </div>
+                
+                <div class="field-group">
+                    <div>
+                        <label>Gender <span class="required"></span></label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="gender" value="male" required> Male</label>
+                            <label><input type="radio" name="gender" value="female"> Female</label>
+                        </div>
+                    </div>
+                    <div>
+                        <label>Contact Number <span class="required"></span></label>
+                        <input type="tel" id="contact_number" name="contact_number" oninput="validatePhone(this)" required>
+                    </div>
+                    <div>
+                        <label>Parent / Alternate Contact Number <span class="required"></span></label>
+                        <input type="tel" id="alt_contact_number" name="alt_contact_number" oninput="validatePhone(this)" required>
+                    </div>
+                </div>
+                <div class="field-group">
+                    <div>
+                        <label>Email ID <span class="required"></span></label>
+                        <input type="email" id="email_id" name="email_id" required>
+                    </div>
+                    <div>
+                        <label for="aadhaar_number">Aadhaar Number <span class="required"></span></label>
+                        <input type="text" id="aadhaar_number" name="aadhaar_number" oninput="validateAadhaar(this)" required>
+                    </div>
+                </div>
+                
+                
+                <div class="section" id="education_details_section" style="display:none;">
+                    <h4>Educational Details</h4>
+                    <div class="field-group">
+                        <div>
+                            <label>Class / Degree with Major <span class="required"></span></label>
+                            <input type="text" id="class_degree" name="class_degree">
+                        </div>
+                        <div>
+                            <label>School / College Name <span class="required"></span></label>
+                            <input type="text" id="school_college_name" name="school_college_name">
+                        </div>
+                    </div>
+                    <label>Medium <span class="required"></span></label>
+                    <input type="text" id="medium" name="medium">
+                </div>
+                
+                <div class="section" id="working_details_section" style="display:none;">
+                    <h4>Working Details</h4>
+                    <div class="field-group">
+                        <div>
+                            <label>What is your role in working profession? <span class="required"></span></label>
+                            <input type="text" id="working_role" name="working_role">
+                        </div>
+                        <div>
+                            <label>Organisation Name <span class="required"></span></label>
+                            <input type="text" id="organisation_name" name="organisation_name">
+                        </div>
+                    </div>
+                    <label>Location of Organisation <span class="required"></span></label>
+                    <input type="text" id="organisation_location" name="organisation_location">
+                </div>
+                
+                <div class="section" id="other_details_section" style="display:none;">
+                    <h4>Other Details</h4>
+                    <label>Details about yourself <span class="required"></span></label>
+                    <textarea id="other_details" name="other_details" rows="3"></textarea>
+                </div>
+                
+                <h4>Referral and Awareness</h4>
+                <div class="field-group">
+                    <div>
+                        <label>Who referred you?<span class="required"></span></label>
+                        <input type="text" id="referral" name="referral" required>
+                    </div>
+                    <div>
+                        <label>Referrer's Contact No<span class="required"></span></label>
+                        <input type="tel" id="referral_contact_no" name="referral_contact_no" oninput="validatePhone(this)" required>
+                    </div>
+                    <div>
+                        <label>How did you know about this scheme? <span class="required"></span></label>
+                        <input type="text" id="scheme_awareness" name="scheme_awareness" required>
+                    </div>
+                </div>
+                
+                <h4>Family Financial Details</h4>
+                <div class="field-group">
+                    <div>
+                        <label>What's the source of Income for your family? <span class="required"></span></label>
+                        <input type="text" id="family_income_source" name="family_income_source" required>
+                    </div>
+                    <div>
+                        <label>Value of Annual Income<span class="required"></span></label>
+                        <input type="number" id="annual_income" name="annual_income" step="1" min="1" oninput="validateNumber(this)" required>
+                    </div>
+                    <div>
+                        <label>Father's Occupation <span class="required"></span></label>
+                        <input type="text" id="father_occupation" name="father_occupation" required>
+                    </div>
+                </div>
+                
+                <div class="field-group">
+                    <div>
+                        <label>Mother's Occupation <span class="required"></span></label>
+                        <input type="text" id="mother_occupation" name="mother_occupation" required>
+                    </div>
+                    <div>
+                        <label>Parent Status (e.g., deceased, not in contact, not funding):</label>
+                        <input type="text" id="parent_status" name="parent_status">
+                    </div>
+                </div>
+                
+                <div class="section" id="fee_payment_section" style="display:none;">
+                    <h4>Fee Payment History</h4>
+                    <div class="field-group">
+                        <div>
+                            <label>How were fees paid last year?:</label>
+                            <input type="text" id="last_year_payment" name="last_year_payment">
+                        </div>
+                        <div>
+                            <label>Why can't the same be done this year?:</label>
+                            <input type="text" id="payment_issue" name="payment_issue">
+                        </div>
+                    </div>
+                </div>
+                
+                <h4>Academic and Skills</h4>
+                <div class="field-group">
+                    <div>
+                        <label>Academic Performance <span class="conditional-text">(if you are a student)</span>:</label>
+                        <input type="text" id="academic_performance" name="academic_performance">
+                    </div>
+                    <div>
+                        <label>Special Skills (e.g., Hifz, orator, writer, sports):</label>
+                        <input type="text" id="special_skills" name="special_skills">
+                    </div>
+                </div>
+                
+                <h4>Scholarship Request</h4>
+                <label>Justify why you need a scholarship? <span class="required"></span></label>
+                <textarea id="scholarship_justification" name="scholarship_justification" rows="4" required></textarea>
+                
+                <label>How much is the fees for the current year? <span class="conditional-text">(Mention with the breakup)</span><span class="required"></span></label>
+                <textarea id="fee_breakup" name="fee_breakup" rows="4" required></textarea>
+            </div>
+
+            <div class="section">
+                <h3>Level 2: Financial Review</h3>
+                <div class="field-group">
+                    <div>
+                        <label>Amount Requesting <span class="required"></span>:</label>
+                        <input type="number" id="confirmed_amount" name="confirmed_amount" step="1" min="1" oninput="validateNumber(this)" required>
+                    </div>
+                    <div id="high_amount_section" style="display:none;">
+                        <label>Why can't you change to a school with relatively low cost?:</label>
+                        <input type="text" id="school_change_reason" name="school_change_reason">
+                    </div>
+                </div>
+                
+                <div class="field-group">
+                    <div>
+                        <label>How will you manage the balance money for fees ?</label>
+                        <input type="text" id="balance_management" name="balance_management" required>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>Level 3: Documentation</h3>
+                <h4>Document Upload Section</h4>
+                <label>Request Category <span class="required"></span>:</label>
+                <select id="request_category" name="request_category" onchange="toggleDocuments()" required>
+                    <option value="">Select Category</option>
+                    <option value="educational">Educational Scholarship</option>
+                    <option value="women">Women Empowerment</option>
+                    <option value="entrepreneur">Entrepreneur</option>
+                    <option value="medical">Medical Aid</option>
+                </select>
+                
+                <!-- Only showing the file upload part (Level 3) with unique IDs for brevity -->
+                 <div id="educational_docs" class="doc-section">
+                    <label>Upload Aadhaar/Any ID proof with Address & Photo:</label>
+                    <input type="file" id="validateFile_educational_aadhaar" name="educational_aadhaar" accept=".pdf,.jpg,.png">
+                    <label>Upload Bank Passbook (First Page) - Xerox:</label>
+                    <input type="file" id="validateFile_educational_passbook" name="educational_passbook" accept=".pdf,.jpg,.png">
+                    <label>Upload Marksheet/Report Card - Xerox:</label>
+                    <input type="file" id="validateFile_educational_marksheet" name="educational_marksheet" accept=".pdf,.jpg,.png">
+                    <label>Upload Fees Receipt from School/College:</label>
+                    <input type="file" id="validateFile_educational_fee_receipt" name="educational_fee_receipt" accept=".pdf,.jpg,.png">
+                    <label>Upload School ID Card:</label>
+                    <input type="file" id="validateFile_educational_school_id" name="educational_school_id" accept=".pdf,.jpg,.png">
+                </div>
+                
+                <div id="women_docs" class="doc-section">
+                    <label>Upload Aadhaar/Any ID proof with Address & Photo:</label>
+                    <input type="file" id="validateFile_women_aadhaar" name="women_aadhaar" accept=".pdf,.jpg,.png">
+                    <label>Upload Bank Passbook (First Page) - Xerox:</label>
+                    <input type="file" id="validateFile_women_passbook" name="women_passbook" accept=".pdf,.jpg,.png">
+                    <label>Upload Supportive Documents for Business Existence:</label>
+                    <input type="file" id="validateFile_women_business_docs" name="women_business_docs" accept=".pdf,.jpg,.png" multiple>
+                </div>
+                
+                <div id="entrepreneur_docs" class="doc-section">
+                    <label>Upload Aadhaar/Address Proof with Photo:</label>
+                    <input type="file" id="validateFile_entrepreneur_aadhaar" name="entrepreneur_aadhaar" accept=".pdf,.jpg,.png">
+                    <label>Upload Bank Passbook (First Page) - Xerox:</label>
+                    <input type="file" id="validateFile_entrepreneur_passbook" name="entrepreneur_passbook" accept=".pdf,.jpg,.png">
+                    <label>Upload Supportive Documents for Business Existence:</label>
+                    <input type="file" id="validateFile_entrepreneur_business_docs" name="entrepreneur_business_docs" accept=".pdf,.jpg,.png" multiple>
+                </div>
+                
+                <div id="medical_docs" class="doc-section">
+                    <label>Upload Aadhaar/Any ID proof with Address & Photo:</label>
+                    <input type="file" id="validateFile_medical_aadhaar" name="medical_aadhaar" accept=".pdf,.jpg,.png">
+                    <label>Upload Bank Passbook (First Page) - Xerox:</label>
+                    <input type="file" id="validateFile_medical_passbook" name="medical_passbook" accept=".pdf,.jpg,.png">
+                    <label>Upload Letter from Hospital/Doctor:</label>
+                    <input type="file" id="validateFile_medical_letter" name="medical_letter" accept=".pdf,.jpg,.png"><label>Upload Receipt/Bills from Hospital/Doctor:</label>
+                    <input type="file" id="validateFile_medical_receipt" name="medical_receipt" accept=".pdf,.jpg,.png" required>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>Level 4: Finalization</h3>
+                <div style="background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%); padding: 25px; border-radius: 12px; margin-bottom: 20px; border-left: 4px solid #667eea;">
+                    <h4 style="margin-top: 0; color: #2d3748;">Send hard copies to:</h4>
+                    <p style="margin: 8px 0; font-weight: 600; color: #1a202c;">AU YOUNG PROFESSIONALS CHARITABLE TRUST</p>
+                    <p style="margin: 8px 0; color: #4a5568;">34-23/810, Aatumanthai Anjalkara Street,<br>Eastgate, Thanjavur - 613001</p>
+                    <p style="margin: 8px 0; color: #4a5568; font-weight: 600;">Landmark: MRG Engineering</p>
+                    <p style="margin: 8px 0; color: #4a5568; font-weight: 600;">Contact: 84283 66631</p>
+                </div>
+                
+                <label>Any specific comments about the beneficiary:</label>
+                <textarea id="beneficiary_comments" name="beneficiary_comments" rows="4"></textarea>
+                
+                <div class="declaration-group">
+                    <input type="checkbox" id="declaration" name="declaration">
+                    <label for="declaration">I hereby declare that the personal information furnished above and all the required documents attached along with this application form are very true. I also understand that if any of the information or document found Wrong/Fraudulent, the Trust (Committee Members) has the rights to take back its funds/benefits offered to me and I will be punishable by law.</label>
+                </div>
+                
+                <div id="captcha-section">
+                    <h4>Security Check</h4>
+                    <p id="captcha-question" style="margin-bottom: 15px; font-weight: 600; font-size: 1.2rem; color: #1a202c; letter-spacing: 2px;"></p>
+                    <input type="text" id="captcha-answer" name="captcha-answer" placeholder="Enter the code above" style="width: 250px; padding: 10px; text-align: center; border: 2px solid #e2e8f0; border-radius: 6px; font-size: 1.1rem;" required>
+                    <div id="captcha-error" class="validation-error" style="display: none; color: #e53e3e; margin-top: 10px;">⚠️ Incorrect code. Please try again.</div>
+                </div>
+                
+                <div id="validation-summary" class="validation-summary">
+                    <h4>⚠️ Please complete the following required fields:</h4>
+                    <ul id="validation-list"></ul>
+                </div>
+                
+                <button id="submit" onclick="submitForm()">
+                    <span>Submit Final Application</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="./js/app.js"></script>
+</body>
+</html>
