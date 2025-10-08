@@ -1,4 +1,4 @@
-// ===== API CONFIG =====
+// ===== API CONFIG ===== 
 const API_CONFIG = {
   // Production
   login: 'https://auypct-portal-backend.onrender.com/api/users/login',
